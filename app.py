@@ -33,4 +33,7 @@ def get_product(product_id):
     return jsonify({"error": "Product not found"}), 404
 
 if __name__ == "__main__":
-    app.run()
+    # Set the port using the environment variable, defaulting to 5000 if not provided
+    port = int(os.getenv("PORT", 5000))
+    # Run the Flask app on all IPs and the dynamic port
+    app.run(host="0.0.0.0", port=port)
