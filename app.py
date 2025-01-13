@@ -2,6 +2,7 @@ import os
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from pymongo import MongoClient
+from urllib.parse import quote  # Replacing the deprecated werkzeug import
 
 app = Flask(__name__)
 CORS(app)
@@ -33,7 +34,6 @@ def get_product(product_id):
     return jsonify({"error": "Product not found"}), 404
 
 if __name__ == "__main__":
-    # Set the port using the environment variable, defaulting to 5000 if not provided
-    port = int(os.getenv("PORT", 5000))
-    # Run the Flask app on all IPs and the dynamic port
-    app.run(host="0.0.0.0", port=port)
+    # Change the port to match environment variable or default to 5000
+    port = int(os.getenv("PORT", 5000))  # Default to 5000 if PORT environment variable is not set
+    app.run(host="0.0.0.0", port=port, debug=True)  # Listen on all IP addresses (host="0.0.0.0")
